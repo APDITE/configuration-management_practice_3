@@ -1,0 +1,4 @@
+- load_const: 50
+- read: 120
+- write: 351
+- eq: 185

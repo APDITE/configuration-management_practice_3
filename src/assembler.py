@@ -1,4 +1,4 @@
-"""Ассемблер УВМ: программа на языке YAML -> промежуточное представление.
+"""Ассемблер УВМ: программа на языке YAML -> машинный код.
 
 Использование:
     python3 src/assembler.py -i program.yaml -o program.bin [-t]
@@ -7,8 +7,9 @@
 import argparse
 import sys
 
+from binfile import write_binary
+from codec import encode, encode_program, format_bytes
 from errors import UvmError
-from isa import format_fields
 from source import load_program
 
 PROG = "assembler"
@@ -24,16 +25,19 @@ def build_parser():
     parser.add_argument("-o", "--output", required=True, metavar="PATH",
                         help="path to the binary output file")
     parser.add_argument("-t", "--test", action="store_true",
-                        help="test mode: print the assembled program")
+                        help="test mode: print the bytes of every command")
     return parser
 
 
 def run(args):
     """Выполнить ассемблирование по разобранным параметрам."""
     instructions = load_program(args.input)
+    code = encode_program(instructions)
+    write_binary(args.output, code)
     if args.test:
         for instruction in instructions:
-            print(format_fields(instruction))
+            print(format_bytes(encode(instruction)))
+    print(f"Binary size: {len(code)} bytes")
     return 0
 
 

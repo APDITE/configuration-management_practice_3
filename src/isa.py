@@ -45,7 +45,3 @@ SPECS = (LOAD_CONST, READ, WRITE, EQ)
 BY_MNEMONIC = {spec.mnemonic: spec for spec in SPECS}
 BY_OPCODE = {spec.opcode: spec for spec in SPECS}
 
-
-def format_fields(instruction):
-    """Строка с полями и значениями, как в тестах спецификации."""
-    return f"A={instruction.a}, B={instruction.b}"

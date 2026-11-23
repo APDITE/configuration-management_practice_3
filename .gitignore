@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.bin
+*.o
+*.zip
+*.tar.gz
+out/
+build/
+dist/
+*.egg-info/
+.venv/
+.idea/
+.vscode/
+*.swp
+.DS_Store
